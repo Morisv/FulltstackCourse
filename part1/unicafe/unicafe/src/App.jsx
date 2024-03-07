@@ -25,13 +25,21 @@ const App = () => {
       <DisplayStats textStats={'good'} amount={good}/>
       <DisplayStats textStats={'neutral'} amount={neutral}/>
       <DisplayStats textStats={'bad'} amount={bad}/>
+      <DisplayStats textStats={'all'} amount={good + neutral + bad}/>
+      <DisplayStats textStats={'average'} amount={(good - bad)/((good+neutral+bad))}/>
+      <CalcPercentage textPercentage={'Percentage of positives'} percentage={good/(good+neutral+bad)*100} percSign={'%'}/>
     </div>
   )
 }
+const CalcPercentage = ({textPercentage, percentage, percSign}) => (
+  <div>
+    <p> {textPercentage} {percentage} {percSign}</p>
+  </div>
+)
 const DisplayStats =  ({textStats, amount}) =>(
   <div>
     <p> {textStats} {amount}</p>
-  </div>
+</div>
 )
 
 const Button = ({handleClick, text}) => (
