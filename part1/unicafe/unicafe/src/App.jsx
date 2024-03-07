@@ -15,6 +15,8 @@ const App = () => {
   const handleBadClick = () => {
     setBad (bad + 1)
   }
+  if (good != 0 || neutral != 0 || bad != 0)
+  {
   return (
     <div>
       <h1>Give Feedback</h1>
@@ -30,6 +32,18 @@ const App = () => {
       <DisplayStats textStats={'Percentage of positives'} amount = {good/(good+neutral+bad)*100} percSign={'%'}/>
     </div>
   )
+  }else{
+  return (
+    <div> 
+      <h1>Give Feedback</h1>
+      <Button handleClick={handleGoodClick} text={'good'}/>
+      <Button handleClick={handleNeutralClick} text={'neutral'}/>
+      <Button handleClick={handleBadClick} text = {'bad'} />
+      <h1>Statistics</h1>
+      <p>No feedback given yikes</p>
+    </div>
+  )
+  }
 }
 const DisplayStats =  ({textStats, amount, percSign}) =>(
   <div>
