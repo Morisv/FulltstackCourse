@@ -26,19 +26,14 @@ const App = () => {
       <DisplayStats textStats={'neutral'} amount={neutral}/>
       <DisplayStats textStats={'bad'} amount={bad}/>
       <DisplayStats textStats={'all'} amount={good + neutral + bad}/>
-      <DisplayStats textStats={'average'} amount={(good - bad)/((good+neutral+bad))}/>
-      <CalcPercentage textPercentage={'Percentage of positives'} percentage={good/(good+neutral+bad)*100} percSign={'%'}/>
+      <DisplayStats textStats={'average'} amount={(good - bad)/((good+neutral+bad))}/> 
+      <DisplayStats textStats={'Percentage of positives'} amount = {good/(good+neutral+bad)*100} percSign={'%'}/>
     </div>
   )
 }
-const CalcPercentage = ({textPercentage, percentage, percSign}) => (
+const DisplayStats =  ({textStats, amount, percSign}) =>(
   <div>
-    <p> {textPercentage} {percentage} {percSign}</p>
-  </div>
-)
-const DisplayStats =  ({textStats, amount}) =>(
-  <div>
-    <p> {textStats} {amount}</p>
+    <p> {textStats} {amount} {percSign}</p>
 </div>
 )
 
