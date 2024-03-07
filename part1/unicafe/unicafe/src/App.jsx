@@ -24,13 +24,9 @@ const App = () => {
       <Button handleClick={handleNeutralClick} text={'neutral'}/>
       <Button handleClick={handleBadClick} text = {'bad'} />
       <h1>Statistics</h1>
-      <DisplayStats textStats={'good'} amount={good}/>
-      <DisplayStats textStats={'neutral'} amount={neutral}/>
-      <DisplayStats textStats={'bad'} amount={bad}/>
-      <DisplayStats textStats={'all'} amount={good + neutral + bad}/>
-      <DisplayStats textStats={'average'} amount={(good - bad)/((good+neutral+bad))}/> 
-      <DisplayStats textStats={'Percentage of positives'} amount = {good/(good+neutral+bad)*100} percSign={'%'}/>
+      <DisplayStats yes = {good} neut = {neutral} no = {bad} sign ={'%'}/>
     </div>
+    
   )
   }else{
   return (
@@ -45,11 +41,24 @@ const App = () => {
   )
   }
 }
-const DisplayStats =  ({textStats, amount, percSign}) =>(
+
+const StatisticsLine = (props) =>(
   <div>
-    <p> {textStats} {amount} {percSign}</p>
+  <p> {props.textStats} {props.amount} {props.percSign}</p>
 </div>
 )
+const DisplayStats =  (props) => {
+  return (
+    <div>
+    <StatisticsLine textStats= {'good'} amount={props.yes}/>
+    <StatisticsLine textStats = {'neutral'} amount = {props.no}/>
+    <StatisticsLine textStats = {'bad'} amount = {props.neut}/>
+    <StatisticsLine textStats={'all'} amount = {props.yes + props.neut + props.no}/>
+    <StatisticsLine textStats={'average'} amount={(props.yes - props.no)/((props.yes + props.neut + props.no))}/>
+    <StatisticsLine textStats={'Percentage of positives'} amount = {props.yes/(props.yes+props.neut+props.no)*100} percSign={props.sign}/> 
+    </div>
+  )
+}
 
 const Button = ({handleClick, text}) => (
   <button onClick = {handleClick} >
