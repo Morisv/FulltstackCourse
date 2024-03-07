@@ -24,6 +24,7 @@ const App = () => {
       <Button handleClick={handleNeutralClick} text={'neutral'}/>
       <Button handleClick={handleBadClick} text = {'bad'} />
       <h1>Statistics</h1>
+      
       <DisplayStats yes = {good} neut = {neutral} no = {bad} sign ={'%'}/>
     </div>
     
@@ -47,16 +48,37 @@ const StatisticsLine = (props) =>(
   <p> {props.textStats} {props.amount} {props.percSign}</p>
 </div>
 )
+
 const DisplayStats =  (props) => {
   return (
-    <div>
-    <StatisticsLine textStats= {'good'} amount={props.yes}/>
-    <StatisticsLine textStats = {'neutral'} amount = {props.no}/>
-    <StatisticsLine textStats = {'bad'} amount = {props.neut}/>
-    <StatisticsLine textStats={'all'} amount = {props.yes + props.neut + props.no}/>
-    <StatisticsLine textStats={'average'} amount={(props.yes - props.no)/((props.yes + props.neut + props.no))}/>
-    <StatisticsLine textStats={'Percentage of positives'} amount = {props.yes/(props.yes+props.neut+props.no)*100} percSign={props.sign}/> 
-    </div>
+    <table>
+      <tbody>
+        <tr>
+            <td><StatisticsLine textStats={'good'} /> </td>
+            <td><StatisticsLine amount={props.yes}/></td>
+        </tr>
+        <tr>
+            <td><StatisticsLine textStats={'neutral'}/></td>
+            <td><StatisticsLine amount={props.neut}/></td>
+        </tr>
+        <tr>
+            <td><StatisticsLine textStats={'bad'}/></td>
+            <td><StatisticsLine amount={props.no}/></td>
+        </tr>
+        <tr>
+            <td><StatisticsLine textStats={'all'} /></td>
+            <td><StatisticsLine amount={props.yes + props.neut + props.no}/></td>
+        </tr>
+        <tr>
+            <td><StatisticsLine textStats={'average'} /></td>
+            <td><StatisticsLine amount={(props.yes - props.no)/((props.yes + props.neut + props.no))}/></td>
+        </tr>
+        <tr>
+            <td><StatisticsLine textStats={'positives'}/></td>
+            <td><StatisticsLine amount={props.yes/(props.yes+props.neut+props.no)*100} percSign={props.sign}/></td>
+        </tr>
+      </tbody>
+    </table>
   )
 }
 
