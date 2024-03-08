@@ -15,6 +15,15 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   
   const [votesArray, setVotes] = useState(() => new Array(anecdotes.length).fill(0))
+  const mostVoted = [...anecdotes]
+  let anecdoteOfTheDay = selected
+  for (let i = 0; i < votesArray.length; i++)
+  {
+    if (votesArray[anecdoteOfTheDay] < votesArray[i])
+    {
+      anecdoteOfTheDay = i
+    }
+  }
 
   const getNumber = () => (
     setSelected (Math.floor(Math.random()*anecdotes.length))
@@ -24,13 +33,38 @@ const App = () => {
     newArray[selected] += 1
     setVotes(newArray)   
 }
+let checkForVotes = 0
+for (let x = 0; x < votesArray.length; x++)
+{
+  if (checkForVotes < votesArray[x])
+  {
+    checkForVotes = votesArray[x]
+  }
+}
 
+  if (checkForVotes == 0)
+  {
   return (
     <div>
-      <p>{anecdotes[selected]} </p>
-      <Button handleClick={doTheVoting} text={'vote'}/>
-      <Button handleClick={getNumber} text={'anecdote'}/>
-      <p>Votes : {votesArray[selected]}</p>
+      <h1>Anecdote of the Day</h1>
+        <p>{anecdotes[selected]} </p>
+          <Button handleClick={doTheVoting} text={'vote'}/>
+          <Button handleClick={getNumber} text={'anecdote'}/>
+        <p>Votes : {votesArray[selected]}</p>
+      <h1>Anecdote with most Votes</h1>
+        <p>Not votes yet</p>
+    </div>
+  )
+  }
+  return (
+    <div>
+      <h1>Anecdote of the Day</h1>
+        <p>{anecdotes[selected]} </p>
+          <Button handleClick={doTheVoting} text={'vote'}/>
+          <Button handleClick={getNumber} text={'anecdote'}/>
+        <p>Votes : {votesArray[selected]}</p>
+      <h1>Anecdote with most Votes</h1>
+        <p>{mostVoted[anecdoteOfTheDay]}</p>
     </div>
   )
 }
