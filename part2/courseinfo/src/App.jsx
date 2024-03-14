@@ -1,38 +1,4 @@
 const App = () => {
-
-
-const Course = ({course}) => {
-  return (
-    <div>
-      <Header header = {course.name}/>
-        {course.parts.map(part =>
-          <Parts key = {part.id} name ={part.name} exercises = {part.exercises}/>
-          )}
-       <Total array = {course.parts}/> 
-    </div>
-  )
-} 
-
-const Header = ({header}) =>
-    <h3>{header}</h3>
-
-const Courses = (props) => 
-    <h1>{props.courseNames}</h1>
-
-const Parts = (props) =>{
-  return (
-    <p>{props.name} {props.exercises}</p>
-  )
-}
-
-const Total = (props) => {
-  return (
-    <strong>Total {props.array.reduce( (totalId, currentValue) => totalId + currentValue.exercises, 0)} </strong>
-  )
-  
-}
-
-
 const courses = [
   {
     name: 'Half Stack application development',
