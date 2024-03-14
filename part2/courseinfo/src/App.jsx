@@ -1,23 +1,42 @@
 const App = () => {
 
 
-const Course = () => {
+const Course = ({course}) => {
   return (
     <div>
-      <h1> {course.name}</h1>
-        {course.parts.map(cour =>
-          <p key = {cour.id}>
-            {cour.name} {cour.exercises}
-          </p>
+      <Header header = {course.name}/>
+        {course.parts.map(part =>
+          <Parts key = {part.id} name ={part.name} exercises = {part.exercises}/>
           )}
-       <strong>Total {course.parts.reduce( (totalId, currentValue) => totalId + currentValue.exercises, 0)}</strong> 
+       <Total array = {course.parts}/> 
     </div>
+  )
+} 
+
+const Header = ({header}) =>
+    <h3>{header}</h3>
+
+const Courses = (props) => 
+    <h1>{props.courseNames}</h1>
+
+const Parts = (props) =>{
+  return (
+    <p>{props.name} {props.exercises}</p>
   )
 }
 
-  const course = {
-    id: 1,
+const Total = (props) => {
+  return (
+    <strong>Total {props.array.reduce( (totalId, currentValue) => totalId + currentValue.exercises, 0)} </strong>
+  )
+  
+}
+
+
+const courses = [
+  {
     name: 'Half Stack application development',
+    id: 1,
     parts: [
       {
         name: 'Fundamentals of React',
@@ -40,10 +59,31 @@ const Course = () => {
         id: 4
       }
     ]
+  }, 
+  {
+    name: 'Node.js',
+    id: 2,
+    parts: [
+      {
+        name: 'Routing',
+        exercises: 3,
+        id: 1
+      },
+      {
+        name: 'Middlewares',
+        exercises: 7,
+        id: 2
+      }
+    ]
   }
-  const total = course.parts.reduce( (totalId, currentValue) => totalId + currentValue.exercises, 0)
-  console.log('Total of exercises', total);
-  return <Course course={course} />
+]
+
+  return (
+    <div> 
+      <h1>Web dev </h1>
+      {courses.map (course => (  <Course key = {course.id} course={course}/>
+      ))}</div>
+  )
 }
 
 export default App
