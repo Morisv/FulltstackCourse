@@ -1,7 +1,7 @@
 const RenderNames = ({showing}) => {
     return (
     <div>
-        <h2>Numbers</h2>
+        <h3>Numbers</h3>
         <ul>
           {showing.map(person =>
             <li key = {person.id}>{person.name} {person.number}</li>)}
