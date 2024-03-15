@@ -1,3 +1,6 @@
+import Filter from './components/filter'
+import Adding from './components/addPeople'
+import RenderNames from './components/names'
 import { useState } from 'react'
 
 const App = () => {
@@ -53,28 +56,15 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      filter shown with : <input value ={newFilter} 
-      onChange ={handleFiltering}/>
-      <p></p>
-      <form onSubmit = {addNewName}>
-        <div>
-          name: <input value ={newName}
-          onChange={handleNameChange} />
-        </div>
-        <p></p>
-        <div>
-          number: <input value = {newNumber} 
-          onChange ={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <ul>
-        {namesToShow.map(person =>
-          <li key = {person.id}>{person.name} {person.number}</li>)}
-      </ul>
+      <Filter filter ={newFilter}
+      handlingFiltering={handleFiltering}
+      />
+        <Adding addNewName ={addNewName}
+        newName = {newName}
+        handleNameChange = {handleNameChange}
+        handleNumberChange ={handleNumberChange}
+        />
+      <RenderNames showing = {namesToShow}/>
     </div>
   )
 }
